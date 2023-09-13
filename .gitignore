@@ -1,0 +1,33 @@
+# Ignore Node.js modules
+node_modules/
+
+# Ignore environment configuration file
+.env
+
+# Ignore logs and debug files
+*.log
+npm-debug.log*
+
+# Ignore Mac-specific files
+.DS_Store
+
+# Ignore user-specific files
+*.suo
+*.user
+*.sln.docstates
+
+# Ignore Visual Studio Code configuration files
+.vscode/
+
+# Ignore operating system generated files
+Thumbs.db
+ehthumbs.db
+
+# Ignore WebStorm project files
+.idea/
+
+# Ignore test coverage output
+coverage/
+
+# Ignore dependency directories
+dependencies/
