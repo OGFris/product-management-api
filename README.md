@@ -65,41 +65,148 @@ The purchase model is designed to track purchase transactions efficiently. By re
 
 ## API Usage
 
-Provide detailed information on how to use your API.
+In this section, we'll provide details on how to use the API endpoints of our API for product management.
 
 ### Endpoints
 
-List and describe each API endpoint, including the HTTP method, URL, request body (if applicable), and expected response.
+#### 1. Create a Product
 
-- **Endpoint 1**: Description of the endpoint.
-  - Method: GET
-  - URL: `/api/endpoint-1`
-  - Request Body (if applicable): None
-  - Response:
+- **Method**: POST
+- **URL**: `/api/products`
+- **Request Body**:
+  - JSON object with the following fields:
+    - `name` (string): The name of the product.
+    - `category` (string): The category to which the product belongs.
+    - `price` (number): The price of the product.
+    - `availability` (boolean): Indicates whether the product is available.
+
+- **Response**:
+  - HTTP Status: 201 (Created)
+  - JSON object representing the created product:
     ```json
     {
-      "message": "Response message",
-      "data": {
-        "field1": "value1",
-        "field2": "value2"
+      "_id": "product_id",
+      "name": "Product Name",
+      "category": "Product Category",
+      "price": 19.99,
+      "availability": true
+    }
+    ```
+
+#### 2. Get All Products
+
+- **Method**: GET
+- **URL**: `/api/products`
+- **Response**:
+  - HTTP Status: 200 (OK)
+  - JSON array containing a list of products:
+    ```json
+    [
+      {
+        "_id": "product_id_1",
+        "name": "Product 1",
+        "category": "Category A",
+        "price": 29.99,
+        "availability": true
+      },
+      {
+        "_id": "product_id_2",
+        "name": "Product 2",
+        "category": "Category B",
+        "price": 15.99,
+        "availability": false
       }
+    ]
+    ```
+
+#### 3. Get a Product by ID
+
+- **Method**: GET
+- **URL**: `/api/products/:productId`
+- **Response**:
+  - HTTP Status: 200 (OK)
+  - JSON object representing the product with the specified ID:
+    ```json
+    {
+      "_id": "product_id",
+      "name": "Product Name",
+      "category": "Product Category",
+      "price": 19.99,
+      "availability": true
     }
     ```
 
-- **Endpoint 2**: Description of the endpoint.
-  - Method: POST
-  - URL: `/api/endpoint-2`
-  - Request Body:
+#### 4. Update a Product
+
+- **Method**: PUT
+- **URL**: `/api/products/:productId`
+- **Request Body**:
+  - JSON object with fields to update (e.g., `name`, `price`, `availability`).
+
+- **Response**:
+  - HTTP Status: 200 (OK)
+  - JSON object representing the updated product.
+
+#### 5. Delete a Product
+
+- **Method**: DELETE
+- **URL**: `/api/products/:productId`
+- **Response**:
+  - HTTP Status: 204 (No Content)
+
+
+#### 6. Purchase a Product
+
+- **Method**: POST
+- **URL**: `/api/purchases`
+- **Request Body**:
+  - JSON object with the following fields:
+    - `product` (string): The ID of the purchased product.
+    - `user` (string): The ID of the user making the purchase.
+
+- **Response**:
+  - HTTP Status: 201 (Created)
+  - JSON object representing the created purchase:
     ```json
     {
-      "field1": "value1",
-      "field2": "value2"
+      "_id": "purchase_id",
+      "product": "product_id",
+      "user": "user_id",
+      "date": "2023-09-15T12:00:00Z"
     }
     ```
-  - Response:
+
+#### 7. Purchase Statistics
+
+- **Method**: GET
+- **URL**: `/api/purchases/stats`
+- **Response**:
+  - HTTP Status: 200 (OK)
+  - JSON object containing purchase statistics:
     ```json
     {
-      "message": "Response message",
-      "data": null
+      "totalPurchases": 50,
+      "topSellingProducts": [
+        {
+          "_id": "product_id_1",
+          "name": "Product 1",
+          "totalPurchases": 25
+        },
+        {
+          "_id": "product_id_2",
+          "name": "Product 2",
+          "totalPurchases": 15
+        }
+      ],
+      "purchaseTrends": [
+        {
+          "date": "2023-09-01",
+          "totalPurchases": 5
+        },
+        {
+          "date": "2023-09-02",
+          "totalPurchases": 10
+        }
+      ]
     }
     ```
